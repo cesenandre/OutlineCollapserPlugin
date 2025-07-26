@@ -17,8 +17,10 @@ void FOutlineCollapserModule::StartupModule()
     GEditor->GetSelectedActors()->SelectObjectEvent.AddRaw(this, &FOutlineCollapserModule::OnActorSelected);
     
     // Register editor actor dropped to level
-    //GEditor->OnLevelActorAdded().AddRaw(this, &FOutlineCollapserModule::OnActorAdded);
     FEditorDelegates::OnNewActorsDropped.AddRaw(this, &FOutlineCollapserModule::OnActorsDropped);
+
+    // Register editor new map opened
+    FEditorDelegates::OnMapOpened.AddRaw(this, &FOutlineCollapserModule::OnMapOpened);
 
     // Register editor level events
     FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
@@ -27,15 +29,15 @@ void FOutlineCollapserModule::StartupModule()
     // Add custom sections to UE Menu Builder
     TSharedPtr<FExtender> MenuExtender = MakeShareable(new FExtender());
 
-    /*
-    // Estendi il menu "Window"
+    // Extend "Window" menu
     MenuExtender->AddMenuExtension(
         "WindowLayout",
         EExtensionHook::After,
         PluginCommands,
         FMenuExtensionDelegate::CreateRaw(this, &FOutlineCollapserModule::AddEntriesToMenu));
 
-    // Estendi il menu "Actors"
+    /*
+    // Extend "Actors" menu
     MenuExtender->AddMenuExtension(
         "ActorControl", // Puoi usare anche "Edit" o "Transform" per altre posizioni
         EExtensionHook::After,
@@ -49,10 +51,11 @@ void FOutlineCollapserModule::StartupModule()
             {
                 return MenuExtender.ToSharedRef();
             })
-    // Update Menus with our Extensions
-    LevelEditorModule.GetMenuExtensibilityManager()->AddExtender(MenuExtender);
     */
-
+    
+    // Update menus with our extensions
+    LevelEditorModule.GetMenuExtensibilityManager()->AddExtender(MenuExtender);
+    
     // Add our command action
     LevelEditorModule.GetGlobalLevelEditorActions()->Append(PluginCommands.ToSharedRef());
 
@@ -67,6 +70,7 @@ void FOutlineCollapserModule::ShutdownModule()
     FOutlineCollapserCommands::Unregister();
 
     FEditorDelegates::OnNewActorsDropped.RemoveAll(this);
+    FEditorDelegates::OnMapOpened.RemoveAll(this);
 
     GEditor->GetSelectedActors()->SelectObjectEvent.RemoveAll(this);
 
@@ -78,6 +82,30 @@ void FOutlineCollapserModule::ShutdownModule()
 
     FinalizationWatcher->OnAllPendingActorsFinalized.RemoveAll(this);
 
+}
+
+void FOutlineCollapserModule::OnMapOpened(const FString& FileName, bool bAsTemplate)
+{
+    const UOutlineCollapserSettings* Settings = GetDefault<UOutlineCollapserSettings>();
+    if (Settings && Settings->bCollapseOnMapOpened)
+    {
+        // Too early, doesn't work
+        //CollapseVisibleSceneOutlinerOnNextTick();
+
+        // Workaround -> 0.1s timer
+        /*
+        auto Handle = FTimerHandle();
+        auto Delegate = FTimerDelegate::CreateRaw(this, &FOutlineCollapserModule::CollapseVisibleSceneOutliner);
+        GEditor->GetTimerManager()->SetTimer(Handle, Delegate, 0.1f, false);
+        */
+
+        // This one seems to work fine
+        FTSTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateLambda([this](float DeltaTime)
+            {
+                CollapseVisibleSceneOutliner();
+                return false; // One-shot
+            }));
+    }
 }
 
 void FOutlineCollapserModule::RegisterSettings()

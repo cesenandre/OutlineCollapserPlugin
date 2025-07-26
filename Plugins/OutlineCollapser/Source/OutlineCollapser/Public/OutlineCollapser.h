@@ -44,6 +44,9 @@ private:
     /** Callback when all dropped actors are finalized */
     void OnDroppedActorsFinalized();
 
+    /** Callbacks when a map is opened in editor */
+    void OnMapOpened(const FString& FileName, bool bAsTemplate);
+
     /** Called when an actor gets selected in editor viewport */
     void OnActorSelected(UObject* SelectedObject);
 

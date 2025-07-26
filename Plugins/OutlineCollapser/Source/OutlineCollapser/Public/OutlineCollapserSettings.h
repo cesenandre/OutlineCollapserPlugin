@@ -17,6 +17,10 @@ public:
     UPROPERTY(EditAnywhere, config, Category = "Settings")
     bool bCollapseOnStartup = true;
 
+    /** Collapse after adding an actor */
+    UPROPERTY(EditAnywhere, config, Category = "Settings")
+    bool bCollapseOnMapOpened = true;
+
     /** Collapse after selecting an actor */
     UPROPERTY(EditAnywhere, config, Category = "Settings")
     bool bCollapseOnSelection = true;
