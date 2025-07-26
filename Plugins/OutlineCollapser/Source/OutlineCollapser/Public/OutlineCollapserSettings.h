@@ -26,16 +26,16 @@ public:
 
     /** Jump to Selected Actor Hotkey */
     UPROPERTY(EditAnywhere, config, Category = "Jump to Selected Actor Hotkey")
-    FKey Hotkey = EKeys::J;
+    FKey Hotkey = EKeys::E;
 
     UPROPERTY(EditAnywhere, config, Category = "Jump to Selected Actor Hotkey")
-    bool bCtrlModifier = true;
+    bool bCtrlModifier = false;
 
     UPROPERTY(EditAnywhere, config, Category = "Jump to Selected Actor Hotkey")
     bool bAltModifier = false;
 
     UPROPERTY(EditAnywhere, config, Category = "Jump to Selected Actor Hotkey")
-    bool bShiftModifier = false;
+    bool bShiftModifier = true;
 
 public:
     FOnSettingsChanged& OnSettingChanged() { return SettingChangedEvent; }

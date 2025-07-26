@@ -3,7 +3,7 @@
 	"Version": 1,
 	"VersionName": "1.0",
 	"FriendlyName": "Outline Collapser",
-	"Description": "Keeps the World Outliner folders collapsed and provides customizable hotkeys",
+	"Description": "Keeps the World Outliner folders collapsed.",
 	"Category": "Other",
 	"CreatedBy": "Andrea Bolognesi",
 	"CreatedByURL": "",
