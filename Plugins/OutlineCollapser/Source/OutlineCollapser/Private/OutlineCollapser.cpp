@@ -56,6 +56,10 @@ void FOutlineCollapserModule::StartupModule()
     // Add our command action
     LevelEditorModule.GetGlobalLevelEditorActions()->Append(PluginCommands.ToSharedRef());
 
+    // Add a watcher to drag&dropped actors
+    FinalizationWatcher = MakeShared<FActorFinalizationWatcher>();
+    FinalizationWatcher->OnAllPendingActorsFinalized.AddRaw(this, &FOutlineCollapserModule::OnDroppedActorsFinalized);
+
 }
 
 void FOutlineCollapserModule::ShutdownModule()
@@ -72,6 +76,8 @@ void FOutlineCollapserModule::ShutdownModule()
         FLevelEditorModule& LevelEditorModule = FModuleManager::GetModuleChecked<FLevelEditorModule>("LevelEditor");
         LevelEditorModule.OnTabManagerChanged().RemoveAll(this);
     }
+
+    FinalizationWatcher->OnAllPendingActorsFinalized.RemoveAll(this);
 }
 
 void FOutlineCollapserModule::RegisterSettings()
@@ -184,12 +190,16 @@ void FOutlineCollapserModule::OnActorsDropped(const TArray<UObject*>& Objects, c
     const UOutlineCollapserSettings* Settings = GetDefault<UOutlineCollapserSettings>();
     if (Settings && Settings->bCollapseOnActorDropped)
     {
-        if (GEditor)
-        {
-            auto Handle = FTimerHandle();
-            auto Delegate = FTimerDelegate::CreateRaw(this, &FOutlineCollapserModule::CollapseVisibleSceneOutliner);
-            GEditor->GetTimerManager()->SetTimer(Handle, Delegate, .1f, false);
-        }
+        FinalizationWatcher->AddActors(Actors);
+    }
+}
+
+void FOutlineCollapserModule::OnDroppedActorsFinalized()
+{
+    const UOutlineCollapserSettings* Settings = GetDefault<UOutlineCollapserSettings>();
+    if (Settings && Settings->bCollapseOnActorDropped)
+    {
+        CollapseVisibleSceneOutlinerOnNextTick();
     }
 }
 

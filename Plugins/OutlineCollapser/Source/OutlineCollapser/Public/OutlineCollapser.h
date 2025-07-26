@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
+#include "ActorFinalizationWatcher.h" 
 #include "SSceneOutliner.h"
 
 class FUICommandList;
@@ -40,6 +41,9 @@ private:
     /** Called when an actor is dropped to the level */
     void OnActorsDropped(const TArray<UObject*>& Objects, const TArray<AActor*>& Actors);
 
+    /** Callback when all dropped actors are finalized */
+    void OnDroppedActorsFinalized();
+
     /** Called when an actor gets selected in editor viewport */
     void OnActorSelected(UObject* SelectedObject);
 
@@ -51,5 +55,9 @@ private:
 
     /** Adds Entry to a menu */
     void AddEntriesToMenu(FMenuBuilder& MenuBuilder);
+
+private:
+
+    TSharedPtr<FActorFinalizationWatcher> FinalizationWatcher;
 
 };
