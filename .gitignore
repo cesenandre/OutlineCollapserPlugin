@@ -361,3 +361,14 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+*.vsconfig
+*.7z
+*.sln
+
+/Binaries
+/Intermediate
+/Saved
+/Plugins/OutlineCollapser/Binaries
+/Plugins/OutlineCollapser/Intermediate
+

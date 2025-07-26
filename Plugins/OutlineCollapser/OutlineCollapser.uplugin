@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Outline Collapser",
+	"Description": "Keeps the World Outliner folders collapsed and provides customizable hotkeys",
+	"Category": "Other",
+	"CreatedBy": "Andrea Bolognesi",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+		  "Name": "OutlineCollapser",
+		  "Type": "Editor",
+		  "LoadingPhase": "Default"
+		}
+	]
+}
