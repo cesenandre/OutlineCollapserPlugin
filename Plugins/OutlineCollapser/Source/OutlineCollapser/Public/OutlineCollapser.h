@@ -23,8 +23,8 @@ private:
     /** Register plugin settings with the editor */
     void RegisterSettings();
 
-    /** Notification for any settings changed */
-    void OnSettingsChanged();
+    /** Notification for keybind setting changed */
+    void OnKeybindChanged();
 
     /** Rebind new hotkey */
     void RebindCommands();

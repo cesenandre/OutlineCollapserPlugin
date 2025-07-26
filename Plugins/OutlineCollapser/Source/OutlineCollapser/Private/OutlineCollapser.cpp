@@ -66,7 +66,6 @@ void FOutlineCollapserModule::ShutdownModule()
 {
     FOutlineCollapserCommands::Unregister();
 
-    //FCoreUObjectDelegates::OnObjectPropertyChanged.RemoveAll(this);
     FEditorDelegates::OnNewActorsDropped.RemoveAll(this);
 
     GEditor->GetSelectedActors()->SelectObjectEvent.RemoveAll(this);
@@ -78,6 +77,7 @@ void FOutlineCollapserModule::ShutdownModule()
     }
 
     FinalizationWatcher->OnAllPendingActorsFinalized.RemoveAll(this);
+
 }
 
 void FOutlineCollapserModule::RegisterSettings()
@@ -95,11 +95,11 @@ void FOutlineCollapserModule::RegisterSettings()
     // Notify when a setting change
     if (auto* Settings = GetMutableDefault<UOutlineCollapserSettings>())
     {
-        Settings->OnSettingChanged().AddRaw(this, &FOutlineCollapserModule::OnSettingsChanged);
+        Settings->OnKeybindChanged().AddRaw(this, &FOutlineCollapserModule::OnKeybindChanged);
     }
 }
 
-void FOutlineCollapserModule::OnSettingsChanged()
+void FOutlineCollapserModule::OnKeybindChanged()
 {
     RebindCommands();
 }
