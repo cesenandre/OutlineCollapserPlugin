@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "OutlineCollapserProj",
+			"Path": "..\\Source\\OutlineCollapserProj.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "OutlineCollapserProjEditor",
+			"Path": "..\\Source\\OutlineCollapserProjEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

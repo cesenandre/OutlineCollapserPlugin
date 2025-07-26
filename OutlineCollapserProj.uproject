@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{4DF9A02E-4BC5-5AFD-7CE2-98849F67D411}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "OutlineCollapserProj",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}

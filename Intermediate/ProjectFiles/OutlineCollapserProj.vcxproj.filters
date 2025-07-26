@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\OutlineCollapserProj.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\OutlineCollapserProj.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\OutlineCollapserProjEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <None Include="..\..\OutlineCollapserProj.7z" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{BB38096A-B391-30DC-A0D4-4F3EA6B44507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\OutlineCollapser">
+      <UniqueIdentifier>{05C578EE-8136-33F5-8CAB-4D76DD7E1725}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\OutlineCollapser\Source">
+      <UniqueIdentifier>{298221EF-5E97-39C4-9C67-59F375090AD2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\OutlineCollapser\Source\OutlineCollapser">
+      <UniqueIdentifier>{77ADA51B-6B56-349F-9444-10EB5040F394}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\OutlineCollapser\Source\OutlineCollapser\OutlineCollapser.Build.cs">
+      <Filter>Plugins\OutlineCollapser\Source\OutlineCollapser</Filter>
+    </None>
+    <Filter Include="Plugins\OutlineCollapser\Source\OutlineCollapser\Private">
+      <UniqueIdentifier>{6D36467E-32B3-3D7A-8B7A-286319F0D1C9}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\OutlineCollapser\Source\OutlineCollapser\Private\OutlineCollapser.cpp">
+      <Filter>Plugins\OutlineCollapser\Source\OutlineCollapser\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\OutlineCollapser\Source\OutlineCollapser\Private\OutlineCollapserCommands.cpp">
+      <Filter>Plugins\OutlineCollapser\Source\OutlineCollapser\Private</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\OutlineCollapser\Source\OutlineCollapser\Public">
+      <UniqueIdentifier>{C78EF990-57EA-3C4F-ADDE-B9B2B76ACB0B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\OutlineCollapser\Source\OutlineCollapser\Public\OutlineCollapser.h">
+      <Filter>Plugins\OutlineCollapser\Source\OutlineCollapser\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\OutlineCollapser\Source\OutlineCollapser\Public\OutlineCollapserCommands.h">
+      <Filter>Plugins\OutlineCollapser\Source\OutlineCollapser\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\OutlineCollapser\Source\OutlineCollapser\Public\OutlineCollapserSettings.h">
+      <Filter>Plugins\OutlineCollapser\Source\OutlineCollapser\Public</Filter>
+    </ClCompile>
+    <None Include="..\..\Plugins\OutlineCollapser\OutlineCollapser.uplugin">
+      <Filter>Plugins\OutlineCollapser</Filter>
+    </None>
+    <Filter Include="Source\OutlineCollapserProj">
+      <UniqueIdentifier>{612F712F-D398-33AD-A695-7E77F230436B}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\OutlineCollapserProj\OutlineCollapserProj.Build.cs">
+      <Filter>Source\OutlineCollapserProj</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\OutlineCollapserProj\OutlineCollapserProj.cpp">
+      <Filter>Source\OutlineCollapserProj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\OutlineCollapserProj\OutlineCollapserProj.h">
+      <Filter>Source\OutlineCollapserProj</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
