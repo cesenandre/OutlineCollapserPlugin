@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
-#include <SSceneOutliner.h>
+#include "SSceneOutliner.h"
 
 class FUICommandList;
 
@@ -36,6 +36,9 @@ private:
 
     /** Called when the outliner gets ready */
     void OnTabManagerChanged();
+
+    /** Called when an actor is dropped to the level */
+    void OnActorsDropped(const TArray<UObject*>& Objects, const TArray<AActor*>& Actors);
 
     /** Called when an actor gets selected in editor viewport */
     void OnActorSelected(UObject* SelectedObject);

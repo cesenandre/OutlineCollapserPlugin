@@ -12,13 +12,17 @@ class OUTLINECOLLAPSER_API UOutlineCollapserSettings : public UObject
     GENERATED_BODY()
 
 public:
-    /** Collapse all folders on editor startup */
+    /** Collapse on editor startup */
     UPROPERTY(EditAnywhere, config, Category = "Settings")
     bool bCollapseOnStartup = true;
 
-    /** Collapse folders again after selecting an actor */
+    /** Collapse after selecting an actor */
     UPROPERTY(EditAnywhere, config, Category = "Settings")
     bool bCollapseOnSelection = true;
+
+    /** Collapse after adding an actor */
+    UPROPERTY(EditAnywhere, config, Category = "Settings")
+    bool bCollapseOnActorDropped = true;
 
     /** Keeps 1st item (World/Level) expanded */
     UPROPERTY(EditAnywhere, config, Category = "Settings")

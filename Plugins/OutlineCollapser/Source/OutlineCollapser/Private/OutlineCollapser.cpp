@@ -2,26 +2,9 @@
 #include "OutlineCollapserSettings.h"
 #include "OutlineCollapserCommands.h"
 
-#include "Modules/ModuleManager.h"
-#include "Editor/EditorEngine.h"
-#include "Editor.h"
 #include "LevelEditor.h"
 #include "Selection.h" 
 #include "ISettingsModule.h"
-
-#include "ISceneOutliner.h"
-#include "SceneOutlinerPublicTypes.h"
-#include "SceneOutlinerFwd.h"
-
-#include "SceneOutlinerModule.h"
-#include "SSceneOutliner.h"
-
-#include "ISceneOutlinerColumn.h"
-#include "SceneOutlinerFilters.h"
-#include "SOutlinerTreeView.h"
-
-#include "Widgets/Docking/SDockTab.h"
-#include "Framework/Application/SlateApplication.h"
 
 #define LOCTEXT_NAMESPACE "FOutlineCollapserModule"
 
@@ -30,14 +13,18 @@ void FOutlineCollapserModule::StartupModule()
     RegisterSettings();
     RebindCommands();
     
-    // Register editor actor selection
+    // Register editor actor selected
     GEditor->GetSelectedActors()->SelectObjectEvent.AddRaw(this, &FOutlineCollapserModule::OnActorSelected);
+    
+    // Register editor actor dropped to level
+    //GEditor->OnLevelActorAdded().AddRaw(this, &FOutlineCollapserModule::OnActorAdded);
+    FEditorDelegates::OnNewActorsDropped.AddRaw(this, &FOutlineCollapserModule::OnActorsDropped);
 
     // Register editor level events
     FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
     LevelEditorModule.OnTabManagerChanged().AddRaw(this, &FOutlineCollapserModule::OnTabManagerChanged);
 
-    // Aggiungi sezioni ai menu di Engine
+    // Add custom sections to UE Menu Builder
     TSharedPtr<FExtender> MenuExtender = MakeShareable(new FExtender());
 
     /*
@@ -66,7 +53,7 @@ void FOutlineCollapserModule::StartupModule()
     LevelEditorModule.GetMenuExtensibilityManager()->AddExtender(MenuExtender);
     */
 
-    // Questo serve anche per le shortcut
+    // Add our command action
     LevelEditorModule.GetGlobalLevelEditorActions()->Append(PluginCommands.ToSharedRef());
 
 }
@@ -75,7 +62,8 @@ void FOutlineCollapserModule::ShutdownModule()
 {
     FOutlineCollapserCommands::Unregister();
 
-    FCoreUObjectDelegates::OnObjectPropertyChanged.RemoveAll(this);
+    //FCoreUObjectDelegates::OnObjectPropertyChanged.RemoveAll(this);
+    FEditorDelegates::OnNewActorsDropped.RemoveAll(this);
 
     GEditor->GetSelectedActors()->SelectObjectEvent.RemoveAll(this);
 
@@ -188,6 +176,20 @@ void FOutlineCollapserModule::OnTabManagerChanged()
     if (Settings && Settings->bCollapseOnStartup)
     {
         CollapseVisibleSceneOutlinerOnNextTick();   
+    }
+}
+
+void FOutlineCollapserModule::OnActorsDropped(const TArray<UObject*>& Objects, const TArray<AActor*>& Actors)
+{
+    const UOutlineCollapserSettings* Settings = GetDefault<UOutlineCollapserSettings>();
+    if (Settings && Settings->bCollapseOnActorDropped)
+    {
+        if (GEditor)
+        {
+            auto Handle = FTimerHandle();
+            auto Delegate = FTimerDelegate::CreateRaw(this, &FOutlineCollapserModule::CollapseVisibleSceneOutliner);
+            GEditor->GetTimerManager()->SetTimer(Handle, Delegate, .1f, false);
+        }
     }
 }
 
