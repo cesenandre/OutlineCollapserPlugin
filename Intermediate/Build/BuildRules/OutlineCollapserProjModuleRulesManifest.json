@@ -1,9 +1,0 @@
-{
-	"SourceFiles": [
-		"C:\\Users\\Andrea\\Documents\\Unreal Projects\\OutlineCollapserProj\\Source\\OutlineCollapserProj\\OutlineCollapserProj.Build.cs",
-		"C:\\Users\\Andrea\\Documents\\Unreal Projects\\OutlineCollapserProj\\Plugins\\OutlineCollapser\\Source\\OutlineCollapser\\OutlineCollapser.Build.cs",
-		"C:\\Users\\Andrea\\Documents\\Unreal Projects\\OutlineCollapserProj\\Source\\OutlineCollapserProj.Target.cs",
-		"C:\\Users\\Andrea\\Documents\\Unreal Projects\\OutlineCollapserProj\\Source\\OutlineCollapserProjEditor.Target.cs"
-	],
-	"EngineVersion": "5.5.4"
-}
