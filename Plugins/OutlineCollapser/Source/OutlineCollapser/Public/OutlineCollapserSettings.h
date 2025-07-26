@@ -31,7 +31,7 @@ public:
 
     /** Expand to Selected Actor Hotkey */
     UPROPERTY(EditAnywhere, config, Category = "Expand to Selected Actor Hotkey")
-    FKey Hotkey = EKeys::E;
+    FKey Hotkey = EKeys::R;
 
     UPROPERTY(EditAnywhere, config, Category = "Expand to Selected Actor Hotkey")
     bool bCtrlModifier = false;

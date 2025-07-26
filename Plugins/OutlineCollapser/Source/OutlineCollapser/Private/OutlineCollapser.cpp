@@ -251,14 +251,29 @@ void FOutlineCollapserModule::ExpandParentsOfSelectedItems()
     {
         FSceneOutlinerTreeItemPtr CurrentItem = Item;
 
+        // Keep track of last valid for an eventual root expansion
+        FSceneOutlinerTreeItemPtr LastValidItem = CurrentItem;
+
         while (CurrentItem.IsValid())
         {
             const FSceneOutlinerTreeItemPtr ParentItem = CurrentItem->GetParent();
-            if (!ParentItem.IsValid())
-                break;
 
-            Outliner->SetItemExpansion(ParentItem, true);
-            CurrentItem = ParentItem;
+            if (ParentItem.IsValid())
+            {
+                Outliner->SetItemExpansion(ParentItem, true);
+                CurrentItem = ParentItem;
+                LastValidItem = ParentItem;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        // If we are in root, force an expansion
+        if (LastValidItem.IsValid() && LastValidItem->GetParent() == nullptr)
+        {
+            Outliner->SetItemExpansion(LastValidItem, true);
         }
     }
 }
